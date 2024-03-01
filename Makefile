@@ -28,3 +28,9 @@ install:
 
 traefik-check:
 	kubectl logs $$(kubectl get pod -n traefik -o name --field-selector=status.phase==Running) -n traefik -f
+
+tls-create:
+	kubectl create secret tls tls-argocd \
+		--cert=/ntc/assets/.secrets/certs/kefych.net/active/kefych.net.pem \
+		--key=/ntc/assets/.secrets/certs/kefych.net/active/kefych.net.key \
+		--namespace examples
