@@ -5,12 +5,12 @@ login:
 	argocd login argocd.kefych.net --username admin --password Sayuri721!
 
 argocd_app:
-	kubctl create namespace examples
+	#kc create namespace examples
 	argocd app delete -y guestbook || true
-	argocd app create guestbook --repo https://github.com/argoproj/argocd-example-apps.git --path guestbook --dest-server https://kubernetes.default.svc --dest-namespace examples
+	argocd app create guestbook --repo https://github.com/xhumiq/argorepo.git --path guestbook --dest-server https://kubernetes.default.svc --dest-namespace examples
 
 argocd_app2:
-	argocd app create guestbook --repo https://github.com/xhumiq/argorepo.git --path guestbook --dest-server https://kubernetes.default.svc --dest-namespace examples
+	argocd app create guestbook --repo https://github.com/argoproj/argocd-example-apps.git --path guestbook --dest-server https://kubernetes.default.svc --dest-namespace examples
 	# --ssh-private-key-path ~/id_rsa
 
 golang:
@@ -25,3 +25,6 @@ argowk-check:
 
 install:
 	sudo install ./argo-linux-amd64 /usr/local/bin/argo
+
+traefik-check:
+	kubectl logs $$(kubectl get pod -n traefik -o name --field-selector=status.phase==Running) -n traefik -f

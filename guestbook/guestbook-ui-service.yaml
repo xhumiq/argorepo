@@ -8,22 +8,3 @@ spec:
     targetPort: 80
   selector:
     app: guestbook
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: guestbook-https
-  namespace: examples
-spec:
-  entryPoints:
-    - websecure
-  routes:
-  - kind: Rule
-    match: Host(`guestbook.kefych.net`)
-    priority: 10
-    services:
-    - kind: Service
-      name: guestbook-ui
-      port: http
-  tls:
-    secretName: tls-argocd
