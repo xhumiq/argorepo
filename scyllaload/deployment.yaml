@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scyllaload
+  namespace: argodemo
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: scyllaload
+  template:
+    metadata:
+      labels:
+        app: scyllaload
+    spec:
+      containers:
+      - image: gcr.io/heptio-images/ks-guestbook-demo:0.2
+        name: scyllaload
+        ports:
+        - containerPort: 80
