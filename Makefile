@@ -5,6 +5,10 @@ login:
 	argocd login argocd.kefych.net --username admin --password Sayuri721!
 
 argocd_app:
+	#argocd app delete -y guestbook
+	argocd app create guestbook --repo https://github.com/argoproj/argocd-example-apps.git --path guestbook --dest-server https://kubernetes.default.svc --dest-namespace examples
+
+argocd_app2:
 	argocd app create guestbook --repo https://github.com/xhumiq/argorepo.git --path guestbook --dest-server https://kubernetes.default.svc --dest-namespace examples
 	# --ssh-private-key-path ~/id_rsa
 
