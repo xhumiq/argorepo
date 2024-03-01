@@ -4,6 +4,11 @@ export
 login:
 	argocd login argocd.kefych.net --username admin --password Sayuri721!
 
+gitpush:
+	git add . --all
+	git commit -am "fix"
+	git push origin master
+
 argocd_app:
 	#kc create namespace examples
 	argocd app delete -y guestbook || true
